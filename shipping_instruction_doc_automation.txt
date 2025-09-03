@@ -1,0 +1,38 @@
+shipper --> person or company that arranges for and coordinates the transportation of goods from one place to another
+
+Shipper (Consignor)
+Role: The shipper is the party responsible for submitting the goods for carriage. 
+Typically: This is often the seller or supplier of the goods. 
+Action: They contract with the carrier for the transportation service. 
+
+
+consignee --> 
+
+Role: The consignee is the intended recipient of the goods at the destination point. 
+Typically: This is often the buyer or the final customer. 
+Action: They are the party who receives the shipment and fills out the necessary transportation documents upon arrival. 
+
+Think of it as a transaction: the shipper sends, and the consignee receives. 
+
+Exporter and Shipper -->
+
+What is the meaning of shipper and exporter?
+Exporter receives export order against goods to be exported. Shipper is a person or a company ships the goods, whose details are mentioned in the shipping documents. It can be an exporter who procures the goods or manufacturer of goods. The shipper need not be a registered exporter.
+
+What is an importer or exporter?
+
+An importer is a person or entity that buys goods or services from a foreign country and brings them into their home country. An exporter is a person or entity that sells goods or services from their home country to a foreign country.
+
+Importers
+Definition: An importer purchases goods or services from other countries. 
+Purpose: To obtain products or raw materials that are unavailable, more expensive, or of higher quality domestically. 
+Examples: A company importing machinery to improve productivity, or a country importing fresh fruit in winter from warmer climates.
+
+ 
+Exporters
+Definition:
+An exporter sells goods or services produced in their home country to other nations. 
+Purpose:
+To earn foreign currency, access new markets, and generate higher revenue by leveraging competitive advantages, such as lower production costs due to favorable climate or resources. 
+Examples:
+A country with a suitable climate for coffee beans exporting those beans to other countries. 
