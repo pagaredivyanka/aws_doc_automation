@@ -1,0 +1,233 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Schema for extracting data from various shipping documents.",
+  "class": "default",
+  "type": "object",
+  "definitions": {
+    "proforma_invoice_details": {
+      "type": "object",
+      "properties": {
+        "proforma_invoice_number": {
+          "type": "string",
+          "inferenceType": "explicit",
+          "instruction": "Extract the Proforma Invoice number. Look for labels like 'PROFORMA INVOICE NO.' or similar. The value is an alphanumeric identifier."
+        },
+        "proforma_invoice_date": {
+          "type": "string",
+          "inferenceType": "explicit",
+          "instruction": "Extract the Proforma Invoice date. Look for labels like 'DATE' near the proforma invoice number. The value is a date string, typically in a Day-Month-Year format (e.g., DD/MM/YYYY or YYYY-MM-DD)."
+        }
+      }
+    },
+    "vessel_details": {
+      "type": "object",
+      "properties": {
+        "feeder_vessel_name": {
+          "type": "string",
+          "inferenceType": "explicit",
+          "instruction": "Extract the name of the feeder vessel from the document. which is given near the header 'Feeder Vessel'."
+        },
+        "feeder_vessel_voyage_no": {
+          "type": "string",
+          "inferenceType": "explicit",
+          "instruction": "Extract the 'Voy No.' for the feeder vessel given in the table. take only in number. exclude any other text."
+        },
+        "ocean_vessel_name": {
+          "type": "string",
+          "inferenceType": "explicit",
+          "instruction": "Extract the name of the feeder vessel from the document. which is given near the header 'Feeder Vessel'."
+        },
+        "ocean_vessel_voyage_no": {
+          "type": "string",
+          "inferenceType": "explicit",
+          "instruction": "Extract the 'Voy No.' for the feeder vessel given in the table. take only in number. exclude any other text."
+        }
+      }
+    },
+    "bank_details": {
+			"type": "object",
+			"properties": {
+				"bank_name": {
+					"type": "string",
+					"inferenceType": "explicit",
+					"instruction": "Extract the official bank name used for INR payments. Prefer banks explicitly linked to INR transactions if multiple are mentioned. The name may appear as a labeled field or embedded in text. Ensure it is complete, correctly spelled, and clearly identifies the INR account."
+				},
+				"bank_address": {
+					"type": "string",
+					"inferenceType": "explicit",
+					"instruction": "Extract the full bank address for INR payments, including branch, street, city, and relevant details. Prefer addresses linked to INR enabled accounts if multiple. The address may appear as a labeled field or within descriptive text. Include all information needed to identify the correct branch."
+				},
+				"account_holder_name": {
+					"type": "string",
+					"inferenceType": "explicit",
+					"instruction": "Extract the full name of the account holder from the bank details section. Look for fields or labels such as 'Account Holder,' 'Beneficiary,' or a name directly associated with the account number. Ensure the name is complete and correctly spelled."
+				},
+				"account_number": {
+					"type": "string",
+					"inferenceType": "explicit",
+					"instruction": "Extract the account number from the 'OUR BANK DETAILS' section. Look for labels like 'A/c No.' or 'Account No.'."
+				},
+				"ifsc_code": {
+					"type": "string",
+					"inferenceType": "explicit",
+					"instruction": "Extract the IFSC code from the 'OUR BANK DETAILS' section. Look for the label 'IFSC'."
+				},
+				"swift_code": {
+					"type": "string",
+					"inferenceType": "explicit",
+					"instruction": "Extract the Swift Code from the 'OUR BANK DETAILS' section. Look for the label 'Swift Code'."
+				}
+			}
+	},
+	"container_details": {
+			"type": "object",
+			"properties": {
+				"sr_no": {
+					"type": "string",
+					"inferenceType": "explicit",
+					"instruction": "Extract the serial number from the 'SR. NO.' column."
+				},
+				"container_no": {
+					"type": "string",
+					"inferenceType": "explicit",
+					"instruction": "Extract the container number. Look for the 'CONTAINER NO:', 'Marks & Nos', 'Container No', 'BOX NUMBER', 'PACKAGE NUMBER', or 'Mark & Nos. / QTY'. The value is a combination of letters and numbers."
+				},
+				"batch_no": {
+					"type": "string",
+					"inferenceType": "explicit",
+					"instruction": "Extract the batch number. Look for 'BATCH NO:' as a label, column name, or in paragraphs. The value can be a number or a combination of letters and numbers."
+				},
+				"seal_no": {
+					"type": "string",
+					"inferenceType": "explicit",
+					"instruction": "Extract the seal number. Look for the 'SEAL NO:' column. The value is a combination of letters and numbers."
+				},
+				"no_of_packages": {
+					"type": "number",
+					"inferenceType": "explicit",
+					"instruction": "Extract the number of packages. Look for fields labeled as 'NO. OF PACKAGES', 'NO. & KIND OF PKGS', or 'PKGS'. The value is a number."
+				},
+				"description_of_goods": {
+					"type": "string",
+					"inferenceType": "explicit",
+					"instruction": "Extract the description of the goods from the document. Look for labels like 'Description of Goods', 'Description', or in paragraphs."
+				},
+				"hsn_code": {
+					"type": "string",
+					"inferenceType": "explicit",
+					"instruction": "Extract the HSN code from the document. Look for labels such as 'HSN CODE' or 'HS CODE' or in paragraphs."
+				},
+				"quantity": {
+					"type": "number",
+					"inferenceType": "explicit",
+					"instruction": "Extract the quantity from the 'QUANTITY' column."
+				},
+				"net_weight_kgs": {
+					"type": "number",
+					"inferenceType": "explicit",
+					"instruction": "Extract the net weight in kilograms from the 'NET WEIGHT KGS' or 'NET WT' column."
+				},
+				"gross_weight_kgs": {
+					"type": "number",
+					"inferenceType": "explicit",
+					"instruction": "Extract the gross weight in kilograms from the 'GROSS WEIGHT KGS' column."
+				},
+				"rate_per_unit_usd": {
+					"type": "number",
+					"inferenceType": "explicit",
+					"instruction": "Extract the rate per unit in USD. Look for labels like 'NET RATE USD' or a 'rate per unit' column in tables or paragraphs."
+				},
+				"rate_per_unit_ind": {
+					"type": "number",
+					"inferenceType": "explicit",
+					"instruction": "Extract the rate per unit in INR. Look for labels like 'rate per unit in INR' or 'CARGO VALUE' in columns or paragraphs."
+				}
+			}
+	}
+  },
+  "properties": {
+    "proforma_invoice_details":  {
+        "type": "array",
+        "instruction": "'PROFORMA INVOICE NUMBER'",
+        "items": {
+        "$ref" : "#/definitions/proforma_invoice_details"
+      }
+    },
+    "country_of_origin_of_goods": {
+      "type": "string",
+      "inferenceType": "explicit",
+      "instruction": "Extract the country of origin of the goods. This is the country where the goods were manufactured, produced, or grown. Look for labels like 'Country of Origin,' 'Made in,' or 'Produced in.' If not explicitly labeled, it may be associated with the shipper's or manufacturer's address."
+    },
+    "country_of_final_destination": {
+      "type": "string",
+      "inferenceType": "explicit",
+      "instruction": "Extract the country of final destination of the shipment. This is the country, or location where the goods are to be delivered. Look for headers such as 'Country of Final Destination', 'Destination'."
+    },
+    "vessel_details": {
+      "type": "array",
+      "instruction": "Extract all vessel details, including the feeder vessel, ocean vessel, and voyage number of there respective from the document. Ensure values are complete and accurate.",
+      "items": {
+        "$ref": "#/definitions/vessel_details"
+      }
+    },
+    "date_of_shipment": {
+      "type": "string",
+      "inferenceType": "explicit",
+      "instruction": "Extract the date of shipment from the document. Look for fields labeled like 'Date of Shipment' or 'shipment date'. The value is a date string, e.g., 'Sep. 06, 2025'."
+    },
+    "total_net_weight": {
+      "type": "string",
+      "inferenceType": "explicit",
+      "instruction": "Extract the total net weight in kilograms.This may labeled as 'NET WEIGHT KGS' or 'NETT WT' column or found in a summary table. but it must be greater than or net weight values."
+    },
+    "total_gross_weight_kgs": {
+      "type": "string",
+      "inferenceType": "explicit",
+      "instruction": "Extract the total gross weight in kilograms. This may be labeled as 'GROSS WEIGHT (KGS)', 'GROSS WT', or found in a summary table."
+    },
+    "total_quantity": {
+      "type": "string",
+      "inferenceType": "explicit",
+      "instruction": "Extract the total quantity from the the document. Look for labels like 'QUANTITY' column and total must writen at the last of column or printed in paragraphs. Take the value exactly as given in legal document and in same format."
+    },
+    "total_cbm": {
+      "type": "string",
+      "inferenceType": "explicit",
+      "instruction": "Extract the total cubic meters (CBM) of the shipment. Look for fields labeled like 'MEASUREMENT (CBM)' or in paragraphs."
+    },
+    "bank_details": {
+		"type": "array",
+		"instruction": "Extract all bank details, including the bank name, bank address, account holder name, account number, IFSC code, and Swift code, from the 'OUR BANK DETAILS' or similar section. The values must be exactly as they appear in the legal document.",
+		"items": {
+			"$ref": "#/definitions/bank_details"
+		}
+	},
+	"container_details": {
+		"type": "array",
+		"instruction": "Extract details for each container from the provided table or paragraphs, including container number, seal number, serial number, description of goods, HSN code, weights, rates. extract exact data as given in legal document",
+		"items": {
+			"$ref": "#/definitions/container_details"
+		}
+	},
+	"total_amount_usd": {
+			"type": "number",
+			"inferenceType": "explicit",
+			"instruction": "Extract the total amount in USD. Look for labels like 'TOTAL AMOUNT USD' or 'CARGO VALUE' in columns or paragraphs."
+	},
+	"total_amount_ind": {
+			"type": "number",
+			"inferenceType": "explicit",
+			"instruction": "Extract the total amount in INR. Look for labels like 'TOTAL AMOUNT INR' or 'CARGO VALUE' in columns or highest value in amount in (INR) or paragraphs."
+	},
+	"total_no_of_packages": {
+			"type": "number",
+			"inferenceType": "explicit",
+			"instruction": "Extract the total number of packages or units. Look for labels like 'Total Packages' or 'Packages' in a summary section. The value is a numeric figure."
+	},
+    "total_amount_in_workds":{
+     "type": "string",
+      "inferenceType": "explicit",
+      "instruction": "Extract the total amount in workds from document. Look for fields labeled Amount chargable (in words), AMOUNT IN WORD IN EURO it may printed in table or in paragraphs. take as it is value and it musts be in text format."
+    }
+  }
+}
